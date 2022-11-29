@@ -11,7 +11,7 @@ class Product(models.Model):
     additional_information = models.TextField()
     link = models.CharField(max_length=255)
     image_link = models.CharField(max_length=255)
-    seller = models.CharField(100)
+    seller = models.CharField(max_length=100)
 
 
 class Market(models.Model):
