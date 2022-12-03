@@ -4,7 +4,7 @@ body{
 form {
     width:400px;
     display: flex; justify-content: center;
-    margin-right: 38%;
+    margin-right: 30%;
 }
 h1 {
     color: white;
@@ -12,4 +12,15 @@ h1 {
 }
 .card-text{
     margin-left: 74%;
+}
+.to-left{
+    color: yellow;
+    margin-right: 68%;
+}
+.card-img-top{
+    margin-left: 5px;
+    width: 30px;
+}
+.btn-lg{
+    margin-left: 43%;
 }

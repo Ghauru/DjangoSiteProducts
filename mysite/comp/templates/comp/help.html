@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/6a77954884.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h1>Compare the price!</h1>
+    <h1>Help/FAQ</h1>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="">Help</a>
@@ -26,13 +26,24 @@
               <a class="nav-link" href="./about">About</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
         </div>
       </div>
     </nav>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="#scrollspyHeading1">Поиск товара</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#scrollspyHeading2">Кто автор?</a>
+      </li>
+    </ul>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-light p-3 rounded-2" tabindex="0">
+      <h4 id="scrollspyHeading1">Как найти товар на сайте?</h4>
+      <p>Переходите на страницу <a href="http://127.0.0.1:8000/">home</a> и вбиваете в поиск интересующий вас товар</p>
+      <h4 id="scrollspyHeading2">Кто автор?</h4>
+      <p>Все ссылки на меня вы можете найти внизу страницы сайта или во вкладке
+        <a href="http://127.0.0.1:8000/about">about</a></p>
+    </div>
       <footer class="fixed-bottom">
         <div class="card">
           <div class="card-body">
