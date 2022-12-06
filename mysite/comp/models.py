@@ -13,12 +13,15 @@ class Product(models.Model):
     image_link = models.CharField(max_length=255)
     seller = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Market(models.Model):
     name = models.CharField(max_length=50)
     link = models.CharField(max_length=255)
-
-
+    def __str__(self):
+        return self.name
 class User(models.Model):
     name = models.CharField(max_length=50)
     search_history = models.TextField()

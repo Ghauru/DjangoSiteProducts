@@ -1,13 +1,36 @@
-from django.shortcuts import render
-from .models import Product
-from django.http import Http404
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Market
+from django.forms.models import model_to_dict
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import MarketSerializer
+
+class ProductView(APIView):
+    def get(self, request):
+        product_list = []
+        products = Product.objects.all()
+        for item in products:
+            product_list.append(model_to_dict(item))
+        return Response({"products": product_list})
+
+
+class MarketView(APIView):
+    def get(self, request):
+        markets = Market.objects.all()
+        # the many param informs the serializer that it will be serializing more than a single article.
+        serializer = MarketSerializer(markets, many=True)
+        return Response({"markets": serializer.data})
+    def post(self, request):
+        market = request.data.get('articles')
+        # Create an article from the above data
+        serializer = MarketSerializer(data=market)
+        if serializer.is_valid(raise_exception=True):
+            market_saved = serializer.save()
+        return Response({"success": "Market '{}' created successfully".format(market_saved.title)})
 
 
 def index(request):
-    try:
-        p = Product.objects.get()
-    except Product.DoesNotExist:
-        raise Http404("Товар не найден")
+    p = get_object_or_404(Product, pk=2)
     return render(request, 'comp/index.html', {'product': p})
 
 def about(request):
