@@ -20,4 +20,5 @@ urlpatterns = [
     path('', include('comp.urls')),
     path('admin/', admin.site.urls),
     path('api/', include('comp.api_urls')),
+    path('api/products/', include('comp.converter_urls')),
 ]

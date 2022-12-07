@@ -4,6 +4,7 @@ from django.forms.models import model_to_dict
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import MarketSerializer
+from rest_framework.decorators import api_view
 
 class ProductView(APIView):
     def get(self, request):
@@ -15,7 +16,7 @@ class ProductView(APIView):
 
 
 class MarketView(APIView):
-    def get(self, request):
+    def get(self, request, p_k):
         markets = Market.objects.all()
         # the many param informs the serializer that it will be serializing more than a single article.
         serializer = MarketSerializer(markets, many=True)
@@ -28,7 +29,6 @@ class MarketView(APIView):
             market_saved = serializer.save()
         return Response({"success": "Market '{}' created successfully".format(market_saved.title)})
 
-
 def index(request):
     p = get_object_or_404(Product, pk=2)
     return render(request, 'comp/index.html', {'product': p})
@@ -39,3 +39,22 @@ def about(request):
 
 def site_help(request):
     return render(request, 'comp/help.html')
+
+
+@api_view(('GET',))
+def get_market_by_number(request, p_k):
+    market = get_object_or_404(Market.objects.all(), pk=p_k)
+    market = model_to_dict(market)
+    serializer = MarketSerializer(data=market)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.data
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_market_by_name(request, name):
+    name = name[name.find('name=')+5:]
+    serializer = MarketSerializer(name=name)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.data
+    return Response(data)
