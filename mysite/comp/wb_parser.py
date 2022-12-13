@@ -1,6 +1,5 @@
 import sqlite3
-from .my_functions import parse_product
-import os.path
+from .wb_parser_functions import parse_product
 
 wb_search = 'https://www.wildberries.ru/catalog/0/search.aspx?sort=popular&search='\
             + '+'.join(str(input()).lower().split())

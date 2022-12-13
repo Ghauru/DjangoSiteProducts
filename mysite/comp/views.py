@@ -3,7 +3,7 @@ from .models import Product, Market
 from django.forms.models import model_to_dict
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import MarketSerializer
+from .serializers import MarketSerializer, ProductSerializer
 from rest_framework.decorators import api_view
 
 class ProductView(APIView):
@@ -58,3 +58,26 @@ def get_market_by_name(request, name):
     if serializer.is_valid(raise_exception=True):
         data = serializer.data
     return Response(data)
+
+
+@api_view(('GET',))
+def get_product_by_number(request, p_k):
+    product = get_object_or_404(Product.objects.all(), pk=p_k)
+    product = model_to_dict(product)
+    serializer = ProductSerializer(data=product)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.data
+    return Response(data)
+
+
+@api_view(('GET',))
+def get_product_by_name(request):
+    name = request.GET['name']
+    product = get_object_or_404(Product.objects.all(), name=name)
+    product = model_to_dict(product)
+    serializer = ProductSerializer(data=product)
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.data
+    return Response(data)
+
+
