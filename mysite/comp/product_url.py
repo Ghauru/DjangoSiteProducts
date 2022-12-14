@@ -1,8 +1,7 @@
-from django.urls import path, re_path
-
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('<int:p_k>/', views.get_product_by_number),
+    path('<int:p_k>', views.get_product_by_number),
     path('search/', views.get_product_by_name)
 ]

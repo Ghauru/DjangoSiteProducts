@@ -16,7 +16,7 @@ class ProductView(APIView):
 
 
 class MarketView(APIView):
-    def get(self, request, p_k):
+    def get(self, request):
         markets = Market.objects.all()
         # the many param informs the serializer that it will be serializing more than a single article.
         serializer = MarketSerializer(markets, many=True)
@@ -52,9 +52,11 @@ def get_market_by_number(request, p_k):
 
 
 @api_view(('GET',))
-def get_market_by_name(request, name):
-    name = name[name.find('name=')+5:]
-    serializer = MarketSerializer(name=name)
+def get_market_by_name(request):
+    name = request.GET['name']
+    market = get_object_or_404(Market.objects.all(), name=name)
+    market = model_to_dict(market)
+    serializer = MarketSerializer(data=market)
     if serializer.is_valid(raise_exception=True):
         data = serializer.data
     return Response(data)
