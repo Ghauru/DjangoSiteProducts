@@ -3,6 +3,9 @@ from django.db import models
 
 # Create your models here.
 class Product(models.Model):
+    class Meta:
+        ordering = ['name', 'price']
+
     name = models.CharField(max_length=100)
     price = models.IntegerField()
     exist = models.BooleanField(default=False)

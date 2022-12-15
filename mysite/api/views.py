@@ -68,10 +68,10 @@ def get_product_by_number(request, p_k):
 
 @api_view(('GET',))
 def get_product_by_name(request):
+    product_dict = {}
     name = request.GET['name']
-    product = get_object_or_404(Product.objects.all(), name=name)
-    product = model_to_dict(product)
-    serializer = ProductSerializer(data=product)
-    if serializer.is_valid(raise_exception=True):
-        data = serializer.data
-    return Response(data)
+    products = Product.objects.filter(name__icontains=name)
+    for product in products:
+        product_dict.update(model_to_dict(product))
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
