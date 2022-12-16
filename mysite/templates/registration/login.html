@@ -1,6 +1,24 @@
 {% extends "comp/base_generic.html" %}
 
+{% load static %}
+
+{% block h1 %} <h1>Login</h1> {% endblock %}
 {% block content %}
+{% block navbar %}
+<div class="collapse navbar-collapse" id="navbarText">
+  <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link" href="./">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./help">Help</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./about">About</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
 
 {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
@@ -15,7 +33,8 @@
   {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}" style="background-color: white; margin-top: 5em; margin-left: 36em;
+  border: 2px solid green; height: 200px;">
 {% csrf_token %}
 <table>
 
@@ -30,11 +49,11 @@
 </tr>
 </table>
 
-<input type="submit" value="login" />
+<input type="submit" value="login" style="height: 50px; width: 100px; margin-top: 4.5em;"/>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p><a href="{% url 'password_reset' %}" style="margin-left: 33em; font-size: 18px;">Lost password?</a></p>
 
 {% endblock %}

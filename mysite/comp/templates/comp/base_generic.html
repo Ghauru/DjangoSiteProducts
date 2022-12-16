@@ -10,23 +10,25 @@
     <script src="https://kit.fontawesome.com/6a77954884.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <h1>About</h1>
+    {% block h1 %}<h1>About</h1>{% endblock %}
     <nav class="navbar navbar-expand-lg bg-light">
+      {% block navbar %}
       <div class="container-fluid">
-        <a class="navbar-brand" href="">About</a>
+        <a class="navbar-brand" href="./">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="./">Home</a>
+              <a class="nav-link" href="./help">Help</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./help">Help</a>
+              <a class="nav-link" href="./about">About</a>
             </li>
           </ul>
         </div>
+        {% endblock %}
       </div>
     </nav>
     {% block content %}{% endblock %}
