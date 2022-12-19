@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product
 from django.forms.models import model_to_dict
 from rest_framework.response import Response
+from api.serializers import ProductSerializer
+from parser import wb_parser
 
 
 def index(request):
@@ -23,3 +25,11 @@ def compare(request):
         data = serializer.data
     return Response(data)
 
+def search_view(request):
+    query = request.GET.get('query')
+    try:
+        product = Product.objects.get(name=query)
+    except:
+        wb_parser.full_parser(query)
+        product = Product.objects.get(name=query)
+    return  render(request, 'comp/index.html', {'product': product})
