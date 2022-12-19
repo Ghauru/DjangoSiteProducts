@@ -1,5 +1,21 @@
 {% extends "comp/base_generic.html" %}
 
+{% block navbar %}
+<div class="collapse navbar-collapse" id="navbarText">
+  <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/help">Help</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/about">About</a>
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
 {% block content %}
 <p style="color: white; display: flex; justify-content: center; font-size: 2em; margin-top: 1em;">Logged out!</p>
 
