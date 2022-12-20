@@ -1,19 +1,22 @@
 from selenium.webdriver.common.by import By
 from comp.models import Product
 from selenium import webdriver
+import time
 
-options = webdriver.ChromeOptions()
-options.add_argument("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0")
-options.add_argument("--disable-blink-features=AutomationControlled")
-options.add_argument('--headless')
 
-driver = webdriver.Chrome(executable_path='C:\\Users\\rules\\PycharmProjects\\DjangoSiteProducts\\parser'
-                                          '\\chromedriver\\chromedriver.exe', options=options)
-def parse_product(link):
-    best_price = 0
+def parse_product(query, best_price):
+    link = 'https://www.wildberries.ru/catalog/0/search.aspx?sort=popular&search=' \
+                + '+'.join(query.split())
     product_link = ''
     goods_name = ''
     exist = True
+    options = webdriver.ChromeOptions()
+    options.add_argument("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    # options.add_argument('--headless')
+
+    driver = webdriver.Chrome(executable_path='C:\\Users\\rules\\PycharmProjects\\DjangoSiteProducts\\parser'
+                                              '\\chromedriver\\chromedriver.exe', options=options)
     try:
         driver.get(url=link)
         driver.implicitly_wait(5)
@@ -28,11 +31,14 @@ def parse_product(link):
                     if best_price > price or best_price==0:
                         best_price = price
                         goods_name = product.find_element(By.CLASS_NAME, "goods-name").text
+                        if query not in goods_name:
+                            return parse_product(query, best_price+1)
                         product_link = product.find_element(By.CLASS_NAME, "product-card__main").get_property('href')
         driver.implicitly_wait(5)
     except Exception as ex:
         print(ex)
     finally:
+        time.sleep(5)
         driver.close()
         driver.quit()
     product = Product()
