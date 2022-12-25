@@ -28,8 +28,8 @@ def compare(request):
 def search_view(request):
     query = request.GET.get('query')
     try:
-        product = Product.objects.get(name=query)
+        product = Product.objects.filter(search_name__contains=query.lower())[0]
     except:
         wb_parser.full_parser(query)
-        product = Product.objects.get(name=query)
+        product = Product.objects.filter(search_name__contains=query.lower())[0]
     return  render(request, 'comp/index.html', {'product': product})
