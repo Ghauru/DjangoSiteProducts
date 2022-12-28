@@ -69,16 +69,15 @@ def parse_product(query, best_price):
                             except Exception as e:
                                 print(e)
                             finally:
-                                time.sleep(5)
+                                driver.implicitly_wait(5)
                                 driver.close()
                                 driver.switch_to.window(driver.window_handles[0])
                         compare_count = 0
                         words_list = []
-        driver.implicitly_wait(5)
     except Exception as ex:
         print(ex)
     finally:
-        time.sleep(5)
+        driver.implicitly_wait(50)
         driver.close()
         driver.quit()
     product = Product()
