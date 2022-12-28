@@ -7,7 +7,7 @@ from parser import wb_parser
 
 
 def index(request):
-    p = get_object_or_404(Product, pk=2)
+    p = get_object_or_404(Product)
     return render(request, 'comp/index.html', {'product': p})
 
 def about(request):
@@ -30,6 +30,6 @@ def search_view(request):
     try:
         product = Product.objects.filter(search_name__contains=query.lower())[0]
     except:
-        wb_parser.full_parser(query)
-        product = Product.objects.filter(search_name__contains=query.lower())[0]
+        max_words = ' '.join(wb_parser.full_parser(query))
+        product = Product.objects.filter(search_name__contains=max_words, market_place='Wildberries')[0]
     return  render(request, 'comp/index.html', {'product': product})

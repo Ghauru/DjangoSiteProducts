@@ -57,12 +57,12 @@
     <div class="row row-cols-1 row-cols-md-3" style="margin: 1em;">
       <div class="col">
         <div class="card h-100">
-          <img src="https://static.tildacdn.com/tild3432-3763-4037-b038-333066316536/ios_classic_icon-1.png" class="card-img-top" alt="Ozon">
+          <img src="http://wildberries.co.il/assets/app-icon-180x180.png" class="card-img-top" alt="Wildberries">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <ul class="list-group list-group-horizontal">
               <li class="list-group-item">
-                <img src="{{ product.image_link }}" class="card-img-left" alt="Ozon">
+                <img src="{{ product.image_link }}" class="card-img-left" alt="WB product image">
               </li>
               <li class="list-group-item">
                 <ul class="list-group list-group-vertical">
@@ -70,27 +70,30 @@
                     <p class="card-text-left">Цена: {{ product.price }} рублей.</p>
                   </li>
                   <li class="list-group-item">
-                    <p class="card-text-left">Доставка</p>
+                    <p class="card-text-left">Доставка: {{ product.delivery }}</p>
                   </li>
                   <li class="list-group-item">
                     {% if product.exist %}
                       <p class="card-text-left">Наличие: Да</p>
                     {% else %}
-                      <p class="card-text-left">Наличие: Да</p>
+                      <p class="card-text-left">Наличие: Нет</p>
                     {% endif %}
+                  </li>
+                  <li class="list-group-item">
+                    <p class="card-text-left">Продавец: {{ product.seller }}</p>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
           <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">Last updated 1 min ago</small>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="http://wildberries.co.il/assets/app-icon-180x180.png" class="card-img-top" alt="Wildberries">
+          <img src="https://static.tildacdn.com/tild3432-3763-4037-b038-333066316536/ios_classic_icon-1.png" class="card-img-top" alt="Ozon">
           <div class="card-body">
             <h5 class="card-title">WB goods name</h5>
             <p class="card-text">Цена</p>

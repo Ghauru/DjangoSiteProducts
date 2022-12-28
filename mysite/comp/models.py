@@ -16,6 +16,8 @@ class Product(models.Model):
     image_link = models.CharField(max_length=255)
     seller = models.CharField(max_length=100)
     search_name = models.CharField(max_length=100)
+    delivery = models.CharField(max_length=100)
+    market_place = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
