@@ -1,5 +1,6 @@
 import sqlite3
 from .wb_parser_functions import parse_product
+from comp.models import Product
 
 
 def full_parser(query):
@@ -17,5 +18,10 @@ def full_parser(query):
             cursor.execute(sql_insert_query)
 
     item, max_words = parse_product(query, 0)
-    product_to_database(item)
-    return max_words
+    try:
+        product = Product.objects.filter(search_name__contains=max_words, market_place='Wildberries')
+        return max_words
+    except Exception as e:
+        print(e)
+        product_to_database(item)
+        return max_words
