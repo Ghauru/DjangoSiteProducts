@@ -1,4 +1,3 @@
-from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from comp.models import Product
 from selenium import webdriver
@@ -20,7 +19,7 @@ def parse_product(query, best_price):
     options.add_argument("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0")
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
 
     driver = webdriver.Chrome(executable_path='C:\\Users\\rules\\PycharmProjects\\DjangoSiteProducts\\parser'
                                               '\\chromedriver\\chromedriver.exe', options=options)
